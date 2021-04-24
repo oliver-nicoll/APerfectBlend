@@ -8,43 +8,40 @@ class ProductsController < ApplicationController
         @product = Product.find_by(id: params[:id])
     end
 
-    def index
-        @attractions = Attraction.all
-    end
     
     def show
-        @attraction = Attraction.find_by(id: params[:id])
-        @ride = @attraction.rides.build(user_id: current_user.id)
+        @product = Product.find_by(id: params[:id])
+        @cart = @product.cart_products.build(user_id: current_user.id)
     end
     
     def new
-        @attraction = Attraction.new
+        @product = Product.new
     end
     
     def create
-        attraction = Attraction.create(attraction_params)
-        redirect_to attraction_path(attraction)
+        product = Product.create(product_params)
+        redirect_to products_path(product)
     end
 
     def edit
-        @attraction = Attraction.find_by(id: params[:id])
-        @ride = @attraction.rides.build(user_id: current_user.id)
+        @product = Product.find_by(id: params[:id])
+        @cart = @product.cart_products.build(user_id: current_user.id)
     end
     
     def update
-        attraction = Attraction.find_by(id: params[:id])
-        attraction.update(attraction_params)
-        redirect_to attraction_path(attraction)
+        product = Product.find_by(id: params[:id])
+        product.update(product_params)
+        redirect_to products_path(product)
     end
     
       private
-        def attraction_params
-          params.require(:attraction).permit(
-            :name,
-            :min_height,
-            :tickets,
-            :happiness_rating,
-            :nausea_ratiing
+        def product_params
+          params.require(:product).permit(
+            :product_name,
+            :product_description,
+            :sold_at,
+            :instock,
+            :image_url
           )
         end
 end

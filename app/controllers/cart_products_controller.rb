@@ -1,16 +1,17 @@
 class CartProductsController < ApplicationController
     def create
-        ride = Ride.create(ride_params)
-        message = ride.take_ride
-        redirect_to user_path(ride.user), flash: { message: message }
+        cart_products = CartProduct.create(cart_params)
+        #message = add a flash message here
+        redirect_to user_path(cart_products.user), flash: { message: message }
     end
     
     private
     
-    def ride_params
-        params.require(:ride).permit(
-        :user_id,
-        :attraction_id
+    def cart_params
+        params.require(:cart_products).permit(
+        :cart_id,
+        :product_id,
+        :quantity
         )
     end
 end
