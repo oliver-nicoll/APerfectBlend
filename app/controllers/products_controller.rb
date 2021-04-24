@@ -7,12 +7,6 @@ class ProductsController < ApplicationController
     def show
         @product = Product.find_by(id: params[:id])
     end
-
-    
-    def show
-        @product = Product.find_by(id: params[:id])
-        @cart = @product.cart_products.build(user_id: current_user.id)
-    end
     
     def new
         @product = Product.new
