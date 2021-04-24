@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
     skip_before_action :verified_user, only: [:new, :create]
+    def profile
+      render 'edit'
+    end
+
+    def vendor
+
+    end
 
     def new
       @user = User.new
