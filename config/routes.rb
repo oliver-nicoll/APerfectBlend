@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root('static#home')
+  get '/menu', to: 'static#menu'
+  get '/about_us', to: 'static#about_us'
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
