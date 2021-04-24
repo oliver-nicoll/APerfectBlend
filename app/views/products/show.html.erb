@@ -1,0 +1,8 @@
+<h1><%= @product.product_name %></h1>
+<div>
+   <%= image_tag(@product.image_url) %>
+    <p>About the product: <%= @product.product_description %></p><br>
+    <p>Price: $ <%= @product.sold_at %></p>
+</div>
+
+<%= link_to 'back', products_path(@products) %>

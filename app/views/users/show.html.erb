@@ -1,0 +1,18 @@
+<% if flash[:message] %>
+  <div>
+    <p><%= flash[:message] %></p>
+  </div>
+<% end %>
+
+<div>
+
+  <div>
+    <% if @user.vendor %>
+      <p><strong>VENDOR</strong></p>
+    <% end %>
+    <p><strong>Username:</strong> <%= @user.username %></p>
+    <p><strong>Name:</strong> <%= @user.name %></p>
+    <p><strong>email:</strong>  <%= @user.email %></p>
+    <p><%= link_to 'Products', products_path %></p>
+  </div>
+</div> 
