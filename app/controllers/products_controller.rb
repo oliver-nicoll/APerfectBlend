@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+    def search
+        @products = Product.search(params[:product_name])
+        render :index
+    end
 
     def index
         @products = Product.all
@@ -13,24 +17,42 @@ class ProductsController < ApplicationController
     end
     
     def create
-        product = Product.create(product_params)
-        redirect_to products_path(product)
+        @product = Product.new(product_params)
+
+        if @product.save
+            redirect_to products_path(@product)
+        else
+            #flash message
+            render :new
+        end
     end
 
     def edit
         @product = Product.find_by(id: params[:id])
-        @cart = @product.cart_products.build(user_id: current_user.id)
     end
     
     def update
-        product = Product.find_by(id: params[:id])
-        product.update(product_params)
-        redirect_to products_path(product)
+        @product = Product.find_by(id: params[:id])
+        @product.update(product_params)
+        
+        if @product.valid?
+            redirect_to product_path(@product)
+        else 
+            #flash message
+        end
+
     end
+
+    def destroy
+        @product = Product.find_by(id: params[:id])
+        @product.destroy
+        redirect_to products_path
+    end 
     
       private
         def product_params
           params.require(:product).permit(
+            :vendor_name,
             :product_name,
             :product_description,
             :sold_at,

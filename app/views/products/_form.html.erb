@@ -1,0 +1,14 @@
+#add conditional that can only see this option if logged in and a vendor
+<%= form_with(model: @product) do |f| %>
+    <%= f.label :vendor_name %>
+    <%= f.text_field :vendor_name %><br>
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url %><br>
+    <%= f.label :product_name %>
+    <%= f.text_field :product_name %><br>
+    <%= f.label :product_description %>
+    <%= f.text_field :product_description %><br>
+    <%= f.label :sold_at %>
+    <%= f.number_field :sold_at, in: 1.0..200.0, step: 0.01 %><br>
+    <%= f.submit 'Create Product' %>
+<% end %>

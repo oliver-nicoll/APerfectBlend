@@ -5,4 +5,5 @@
     <p>Price: $ <%= @product.sold_at %></p>
 </div>
 
-<%= link_to 'back', products_path(@products) %>
+<%= link_to 'Back', products_path(@products) %>
+<%= link_to 'Edit Product', edit_product_path(@product) %>
