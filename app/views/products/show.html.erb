@@ -3,6 +3,7 @@
    <%= image_tag(@product.image_url) %>
     <p>About the product: <%= @product.product_description %></p><br>
     <p>Price: $ <%= @product.sold_at %></p>
+    Quantity Available: <%= @product.instock %>
 </div>
 
 <%= link_to 'Back', products_path(@products) %>

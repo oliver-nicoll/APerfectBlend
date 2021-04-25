@@ -14,8 +14,19 @@
  *= require_self
  */
 
- bg-main{
-    background-image: url("../images/A-Perfect-Blend/Welcome.png");
+ .field_with_errors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+  }
+
+#error-explanation {
+    background-color: beige;
+    font-style: italic;
+}
+
+ .bg-main {
+    background-image: url("A-Perfect-Blend/Welcome.png");
     height: 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;

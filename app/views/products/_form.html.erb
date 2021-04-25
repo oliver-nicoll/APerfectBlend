@@ -1,4 +1,17 @@
 #add conditional that can only see this option if logged in and a vendor
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+    <ul>
+      <% @product.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <%= form_with(model: @product) do |f| %>
     <%= f.label :vendor_name %>
     <%= f.text_field :vendor_name %><br>
@@ -8,6 +21,8 @@
     <%= f.text_field :product_name %><br>
     <%= f.label :product_description %>
     <%= f.text_field :product_description %><br>
+    <%= f.label :instock %>
+    <%= f.number_field :instock, in: 1.0..200.0, step: 1.0 %><br>
     <%= f.label :sold_at %>
     <%= f.number_field :sold_at, in: 1.0..200.0, step: 0.01 %><br>
     <%= f.submit 'Create Product' %>

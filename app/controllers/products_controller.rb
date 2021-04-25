@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find_by(id: params[:id])
+        @product.update(instock: @product.instock)
     end
     
     def new
@@ -39,6 +40,7 @@ class ProductsController < ApplicationController
             redirect_to product_path(@product)
         else 
             #flash message
+            render :edit
         end
 
     end

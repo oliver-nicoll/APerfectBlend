@@ -5,8 +5,8 @@ class User < ApplicationRecord
     has_many :products, through: :cart
 
     
-    validates :email, presence: true 
-    validates :username, presence: true 
+    validates :email, presence: true, uniqueness: true
+    validates :username, presence: true, uniqueness: true
     validates :name, length: { minimum: 2 }
     validates :password, length: { in: 6..20 }
     validates :vendor, inclusion: [true, false]
