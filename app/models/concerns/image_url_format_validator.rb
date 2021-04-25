@@ -1,7 +1,5 @@
 class ImageUrlFormatValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
-        #value = https://c.files.bbci.co.uk/12A9B/production/_111434467_gettyimages-1143489763.jpg
-
         if !is_correct?(value)
             record.errors.add attribute, message: "Format is not of png, jpg, jpeg, gif."
         end
