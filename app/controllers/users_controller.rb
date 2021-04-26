@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :verified_user, only: [:new, :create]
+  
     def profile
       render 'edit'
     end
@@ -13,16 +13,24 @@ class UsersController < ApplicationController
     end
   
     def create
-      if @user = User.find_by(name: params[:user][:name])
+      @user = User.new(user_params)
+      if @user.save
+        falsh[:message] = "Successfully signed up."
         session[:user_id] = @user.id
-        redirect_to user_path(@user)
+        redirect_to products_path
       else
-        render 'new'
+        render :new
       end
     end
   
     def destroy
       session.delete("user_id")
       redirect_to root_path
+    end
+
+    private
+
+    def user_params
+      params.require(:user).permit(:vendor, :name, :username, :password, :email)
     end
 end

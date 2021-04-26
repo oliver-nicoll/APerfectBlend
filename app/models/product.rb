@@ -9,7 +9,7 @@ class Product < ApplicationRecord
     validates :image_url, presence: true, image_url_format: { on: :create }
     validates :sold_at, presence: true 
 
-    scrope :search, -> (query) { self.where("title LIKE ?",  "%#{query}%") }
+    scrope :search, -> (query) { self.where("product_name LIKE ?", "%#{query}%") }
     # def self.search(query)
     #     self.where("product_name LIKE ?", "%#{query}%")
     # end

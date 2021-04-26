@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
       if @user && @user.authenticate(params[:user][:password])
           flash[:message] = "Succesful sign in"
           session[:user_id] = @user.id
-          redirect_to images_path
+          redirect_to products_path
       else
-          flash[:message] = "Invalid Credentials"
+          flash[:message] = "Invalid, try again"
           render :new
       end
   end
@@ -33,11 +33,11 @@ class SessionsController < ApplicationController
       end
       
       if @user.valid?
-          flash[:messsage] = "Signed IN with GOOGLE GOOD JOb"
+          flash[:messsage] = "Signed in"
           session[:user_id] = @user.id
           redirect_to images_path
       else
-          flash[:message] = "Credential error"
+          flash[:message] = "Try again!"
           redirect_to login_path
       end
   end
