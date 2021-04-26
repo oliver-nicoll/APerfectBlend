@@ -14,7 +14,7 @@ class CartProductsController < ApplicationController
     def create
         product = Product.find(params[:product_id])
 
-        @cart_product = @cart.add_product(cart_product_params)
+        @cart_product = @cart.add_product(product)
 
         if  @cart_product.save
             #message = add a flash message here

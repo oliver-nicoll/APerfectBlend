@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    before_destroy :not_referenced_by_any_cart_product
     has_many :cart_products
     has_many :carts, through: :cart_products
     has_many :users, through: :carts
@@ -21,4 +22,11 @@ class Product < ApplicationRecord
     # def image_url
     #     Rails.application.routes.url_helpers.rails_representation_url(image.variant(resize: '100x100').processed)
     #   end
+
+    def not_referenced_by_any_cart_product
+        unless cart_products.empty?
+            errors.add(:base, "Cart products present")
+            throw :abort
+        end
+    end
 end

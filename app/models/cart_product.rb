@@ -8,6 +8,6 @@ class CartProduct < ApplicationRecord
     validates :quantity, numericality: { only_integer: true }
 
     def cart_total
-
+        product.sold_at.to_i * quantity.to_i
     end
 end

@@ -58,7 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", require: false
 gem 'image_processing'
-
+gem 'omniauth-google-oauth2'
 
 
 gem "pry", "~> 0.14.1"
