@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if @user && @user.authenticate(params[:user][:password])
           flash[:message] = "Succesful sign in"
           session[:user_id] = @user.id
-          redirect_to products_path
+          redirect_to root_path
       else
           flash[:message] = "Invalid, try again"
           render :new
@@ -17,9 +17,9 @@ class SessionsController < ApplicationController
   end
 
   def logout
-      session.clear
-      redirect_to login_path
-  end
+    session.clear
+    redirect_to login_path
+end
 
   def omniauth
       

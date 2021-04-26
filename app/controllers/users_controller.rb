@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       if @user.save
-        falsh[:message] = "Successfully signed up."
+        flash[:message] = "Successfully signed up."
         session[:user_id] = @user.id
         redirect_to products_path
       else
