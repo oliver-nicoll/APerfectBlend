@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
     has_many :cart_products
     has_many :carts, through: :cart_products
-    has_many :users, through: :carts, optional: true
+    has_many :users, through: :carts
 
     validates :product_name, presence: true, uniqueness: {scope: :image_url, message: 'and Image Url are not UNIQUE'}
     validates :product_description, presence: true 

@@ -7,17 +7,10 @@
     <div class="row small-up-2 large-up-4">
       <div class="column">
         <% @products.each do |p| %>
-                <% if p.image.present? %>
                 <%= image_tag(p.image_url, class: "thumbnail") %>
                 <h5><%= link_to(p.product_name, product_path(p)) %></h5>
-                <p>Price: <%= number_to_currency.p.sold_at / 100.0 %></p>
-                <% if @cart.include?(p) %>
-                  <p> Added to cart! </p>
-                <%  else  %>
-                <p> Try Again </p>
-                <% end %>
+                <p>Price: <%= number_to_currency(p.sold_at)   %></p>
             <%= button_to 'Buy', add_to_cart_path(p), method: :post, class: 'button expanded' %>
-        <% end %>
         <% end %>
       </div>
       <div class="column">
