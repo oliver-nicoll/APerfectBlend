@@ -1,44 +1,34 @@
- <%= form_for @user do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
-        </h2>
+
   
-        <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-  
-    <div class="form-group">
-      <%= f.label :username %>
-      <br>
-      <%= f.text_field :username, class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
+    <%= form_with(model: @user, url: 'signup_path') do |f| %> 
+      
+      <%= f.text_field :name %>
       <%= f.label :name  %>
       <br>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label :vendor, "Are you a Vendor?" %>
+    
+      <%= f.text_field :username %>
+      <%= f.label :username %>
       <br>
-      <%= f.check_box :vendor, class: "form-control" %>
-    </div>
   
-    <div class="form-group">
-      <%= f.label :password %>
-      <br>
-      <%= f.password_field :password, class: "form-control" %>
+    
+    
+      <%= f.email_field :email %>
+      <%= f.label :email  %><br>
+    
   
-    <div class="actions">
+    
+    <%= fields_for :vendor do |permission_fields| %>
+      Check box if you are a Vendor: <%= permission_fields.check_box :vendor %>
+    <% end %><br>
+  
+    
+      <%= f.password_field :password %>
+      <%= f.label :password %><br>
+  
+    
       <br/>
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit "Sign Up" %>
     </div>
   
   <% end %>
+

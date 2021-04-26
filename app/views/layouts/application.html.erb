@@ -81,5 +81,20 @@
     <script>
       $(document).foundation();
     </script>
+    <script>
+    export default {
+      data() {
+        return {
+          checked: true,
+          indeterminate: true
+        }
+      },
+      methods: {
+        toggleIndeterminate() {
+          this.indeterminate = !this.indeterminate
+        }
+      }
+    }
+  </script>
   </body>
 </html>
