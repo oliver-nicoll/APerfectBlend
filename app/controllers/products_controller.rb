@@ -51,7 +51,14 @@ class ProductsController < ApplicationController
         redirect_to products_path
     end 
     
+    def add_to_cart
+        id = params[:id].to_i
+        session[:cart] << product_params
+        redirect_to products_path
+    end
+
       private
+      
         def product_params
           params.require(:product).permit(
             :vendor_name,
@@ -61,5 +68,9 @@ class ProductsController < ApplicationController
             :instock,
             :image_url
           )
+        end
+
+        def initialize_session
+            session[:cart] ||= []
         end
 end

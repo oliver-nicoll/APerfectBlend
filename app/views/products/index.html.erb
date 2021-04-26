@@ -7,23 +7,17 @@
     <div class="row small-up-2 large-up-4">
       <div class="column">
         <% @products.each do |p| %>
+                <% if p.image.present? %>
                 <%= image_tag(p.image_url, class: "thumbnail") %>
                 <h5><%= link_to(p.product_name, product_path(p)) %></h5>
-                <p>$ <%= p.sold_at %></p>
-            <%= link_to 'Buy', new_cart_product_path, class: 'button expanded' %>
+                <p>Price: <%= number_to_currency.p.sold_at / 100.0 %></p>
+                <% if @cart.include?(p) %>
+                  <p> Added to cart! </p>
+                <%  else  %>
+                <p> Try Again </p>
+                <% end %>
+            <%= button_to 'Buy', add_to_cart_path(p), method: :post, class: 'button expanded' %>
         <% end %>
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/300x400">
-        <h5>Nulla At Nulla Justo, Eget</h5>
-        <p>$400</p>
-        <a href="#" class="button expanded">Buy</a>
-      </div>
-      <div class="column">
-        <img class="thumbnail" src="https://placehold.it/300x400">
-        <h5>Nulla At Nulla Justo, Eget</h5>
-        <p>$400</p>
-        <a href="#" class="button expanded">Buy</a>
       </div>
       <div class="column">
         <img class="thumbnail" src="https://placehold.it/300x400">
