@@ -3,7 +3,7 @@ class CreateCartProducts < ActiveRecord::Migration[6.1]
     create_table :cart_products do |t|
       t.references :product 
       t.references :cart
-      t.integer :quantity
+      t.integer :quantity, default: 1
 
       t.timestamps
     end

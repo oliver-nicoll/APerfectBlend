@@ -1,8 +1,10 @@
 class CartsController < ApplicationController
-    
+rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+before_action :set_cart, only: [:show, :edit, :update, :destroy]
     def new
         @cart = Cart.new
     end
+
 
     def create
         @cart = Cart.new(cart_params)
@@ -22,6 +24,17 @@ class CartsController < ApplicationController
         @cart = Cart.find(params[:id])
     end
 
+    def edit 
+
+    end
+
+    def destroy
+        @cart.destroy if @cart.id === session[:cart_id]
+        session[:cart_id] = nil
+
+        redirect_to root_path
+    end
+
     def checkout
 
     end
@@ -29,5 +42,10 @@ class CartsController < ApplicationController
     private 
     def cart_params
         params.require(:cart).permit(:user_id, :checkout)
+    end
+
+    def invalid_cart
+        logger.error "Attempt to access invalid cart #{params[:id]}"
+        redirect_to root_path, notice: "That cart doesn't exist"
     end
 end

@@ -1,6 +1,7 @@
 class CartProduct < ApplicationRecord
     belongs_to :cart 
     belongs_to :user
+    belongs_to :product
 
     validates :product_id, numericality: { only_integer: true }
     validates :cart_id, numericality: { only_integer: true }

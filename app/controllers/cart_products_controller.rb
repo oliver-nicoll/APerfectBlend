@@ -1,30 +1,51 @@
 class CartProductsController < ApplicationController
-    def create
-        cart_products = CartProduct.create(cart_params)
-        #message = add a flash message here
-        redirect_to user_path(cart_products.user), flash: { message: message }
+    include CurrentCart
+    before_action :set_cart_product, only: [:show, :edit, :update, :destroy]
+    before_action :set_cart, only: [:create]
+
+    def index 
+        @cart_products = CartProduct.all
+    end
+    
+    def new
+        @cart_product = CartProduct.new
     end
 
-    def add_to_cart
-        id =  params[:product_id].to_i
-        session[:cart] << params[:product_id]
-        if session[:cart].include?(product_id)
-           #figure out logic :quantity + 1
-        redirect_to products_path
+    def create
+        product = Product.find(params[:product_id])
+
+        @cart_product = @cart.add_product(cart_product_params)
+
+        if  @cart_product.save
+            #message = add a flash message here
+            redirect_to products_path
         else
-            flash[:message]= "Something went wrong, try again"
+            #flash message
+            render :new
+        end
     end
+
+   def destroy
+        @cart = Cart.find(session[:cart_id])
+
+        @cart_product.destroy
+
+        redirect_to root_path
+   end
     
     private
+
+    def set_cart_product
+        @cart_product = CartProduct.find(params[:id])
+    end
     
-    def cart_params
+    def cart_product_params
         params.require(:cart_products).permit(
         :cart_id,
         :product_id,
         :quantity
         )
     end
-    def load_cart
-        @cart = Product.find(session[:cart])
-    end
+
+   
 end

@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
     end
 
       private
-      
+
         def product_params
           params.require(:product).permit(
             :vendor_name,
@@ -66,7 +66,8 @@ class ProductsController < ApplicationController
             :product_description,
             :sold_at,
             :instock,
-            :image_url
+            :image_url,
+            :image
           )
         end
 
