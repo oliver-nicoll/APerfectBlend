@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :products 
   get '/search', to: 'products#search', as: 'search'
   
+  get '/products/my-products', to: 'products#vendor_products'
+  
   post '/products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   delete '/products/delete_cart_item/:id', to: 'products#delete_cart_item', as: 'delete_cart_item'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

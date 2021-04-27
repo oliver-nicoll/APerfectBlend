@@ -16,9 +16,11 @@
                                         <li class="nav-item">
                                         <%= link_to 'Beyond the Blend', products_path, class: 'nav-link' %>                                    
                                         </li>
+
+
                                     <% if logged_in? %>
                                         <li class="nav-item">
-                                        <%= link_to 'My Products', products_path, class: 'nav-link' %>
+                                        <%= link_to 'My Products', products_my_products_path, class: 'nav-link' %>
                                         </li>
                                         <li class="nav-item">
                                         <%= link_to 'Add New Products', new_product_path, class: 'nav-link' %>
@@ -29,6 +31,7 @@
                                        <li class="nav-item">
                                        <%= button_to 'Logout', logout_path, method: 'delete', class: 'nav-link' %>
                                        </li>
+
                                     <% else %>
                                         <li class="nav-item">
                                         <%= link_to 'Sign Up', signup_path, class: 'nav-link' %>
@@ -36,7 +39,12 @@
                                         <li class="nav-item">
                                         <%= link_to 'Login', login_path, class: 'nav-link' %>
                                         </li>
+                                        <li class="nav-item">
+                                        <%= button_to 'Login Google', "/auth/google_oauth2" , class: 'nav-link' %>
+                                        </li>
                                     <% end%>
+
+
                                     <li class="nav-item">
                                     <%= form_with(url: search_path, method: 'get', class: 'd-flex') do |f| %>
                                         <%= f.text_field :product_name, class: "form-control me-2", placeholder: "Search for Product" %>

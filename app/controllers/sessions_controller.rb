@@ -19,47 +19,27 @@ class SessionsController < ApplicationController
   def logout
     session.clear
     redirect_to login_path
-end
-
-  def omniauth
-      
-      @user = User.find_or_create_by(username: auth[:info][:email]) do |u|
-          u.email = auth[:info][:email]
-          u.username = auth[:info][:email]
-          u.name = auth[:info][:name]
-          u.uid = auth[:uid]
-          u.provider = auth[:provider]
-          u.password = SecureRandom.hex(10)
-      end
-      
-      if @user.valid?
-          flash[:messsage] = "Signed in"
-          session[:user_id] = @user.id
-          redirect_to images_path
-      else
-          flash[:message] = "Try again!"
-          redirect_to login_path
-      end
   end
 
-  def omniauth
+    def omniauth
+            
+        @user = User.find_or_create_by(username: auth[:info][:email]) do |u|
+            u.email = auth[:info][:email]
+            u.username = auth[:info][:email]
+            u.name = auth[:info][:name]
+            u.uid = auth[:uid]
+            u.provider = auth[:provider]
+            u.password = SecureRandom.hex(10)
+        end
         
-    @user = User.find_or_create_by(username: auth[:info][:email]) do |u|
-        u.email = auth[:info][:email]
-        u.username = auth[:info][:email]
-        u.name = auth[:info][:name]
-        u.uid = auth[:uid]
-        u.provider = auth[:provider]
-        u.password = SecureRandom.hex(10)
-    end
-    
-    if @user.valid?
-        flash[:messsage] = "Signed IN with GOOGLE GOOD JOb"
-        session[:user_id] = @user.id
-        redirect_to images_path
-    else
-        flash[:message] = "Credential error"
-        redirect_to login_path
+        if @user.valid?
+            flash[:messsage] = "Signed in with Google"
+            session[:user_id] = @user.id
+            redirect_to images_path
+        else
+            flash[:message] = "Try Again"
+            redirect_to login_path
+        end
     end
 
   private

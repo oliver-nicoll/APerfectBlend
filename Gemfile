@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'dotenv-rails', groups: [:development, :test]
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -58,7 +58,23 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk-s3", require: false
 gem 'image_processing'
-gem 'omniauth-google-oauth2'
+
 
 
 gem "pry", "~> 0.14.1"
+
+gem "thin", "~> 1.8"
+
+gem "dotenv-rails", "~> 2.7"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "omniauth-google-oauth2", "~> 1.0"
+
+gem "bulma-rails", "~> 0.9.1"
+
+gem "gravatar_image_tag", "~> 1.2"
+
+gem "carrierwave", "~> 2.2"
+
+gem "mini_magick", "~> 4.11"

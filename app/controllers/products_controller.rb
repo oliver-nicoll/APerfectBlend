@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find_by(id: params[:id])
-        @product.update(instock: @product.instock)
+        @product.update(@product.instock)
     end
     
     def new
@@ -56,6 +56,11 @@ class ProductsController < ApplicationController
         id = params[:id].to_i
         session[:cart] << product_params
         redirect_to products_path
+    end
+
+    def vendor_products
+        binding.pry
+        @product = Product.find_by()
     end
 
       private
