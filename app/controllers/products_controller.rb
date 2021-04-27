@@ -1,12 +1,12 @@
 class ProductsController < ApplicationController
-    
+    before_action
     def search
         @products = Product.search(params[:product_name])
         render :index
     end
 
     def index
-        @products = Product.all
+        @products = Product.all.order("product_name")
     end
 
     def show
@@ -15,10 +15,12 @@ class ProductsController < ApplicationController
     end
     
     def new
+        redirect_if_not_logged_in
         @product = Product.new
     end
     
     def create
+        redirect_if_not_logged_in
         @product = Product.new(product_params)
 
         if @product.save
@@ -30,6 +32,7 @@ class ProductsController < ApplicationController
     end
 
     def edit
+        redirect_if_not_logged_in
         @product = Product.find_by(id: params[:id])
     end
     
@@ -72,8 +75,8 @@ class ProductsController < ApplicationController
             :product_description,
             :sold_at,
             :instock,
-            :image_url,
-            :image
+            :image,
+            :category
           )
         end
 

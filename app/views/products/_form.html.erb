@@ -15,8 +15,10 @@
 <%= form_with(model: @product) do |f| %>
     <%= f.label :vendor_name %>
     <%= f.text_field :vendor_name %><br>
-    <%= f.label :image_url %>
-    <%= f.text_field :image_url %><br>
+    <%= f.label :image %>
+    <%= f.text_field :image %><br>
+    <%= f.label :category %>
+    <%= f.text_field :category %><br>
     <%= f.label :product_name %>
     <%= f.text_field :product_name %><br>
     <%= f.label :product_description %>
