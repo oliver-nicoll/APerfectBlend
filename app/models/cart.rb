@@ -1,5 +1,6 @@
 class Cart < ApplicationRecord 
-    belongs_to :user
+    # belongs_to :product
+    # belongs_to :customer, class_name: "User"
     has_many :cart_products, dependent: :destroy
     has_many :products, through: :cart_products
 

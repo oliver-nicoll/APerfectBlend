@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_024805) do
+ActiveRecord::Schema.define(version: 2021_04_27_034511) do
 
   create_table "cart_products", force: :cascade do |t|
-    t.integer "product_id"
+    t.integer "customer_id", null: false
+    t.integer "product_id", null: false
     t.integer "cart_id"
     t.integer "quantity", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_cart_products_on_cart_id"
+    t.index ["customer_id"], name: "index_cart_products_on_customer_id"
     t.index ["product_id"], name: "index_cart_products_on_product_id"
   end
 
@@ -28,6 +30,15 @@ ActiveRecord::Schema.define(version: 2021_04_27_024805) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "customer_vendors", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "vendor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_customer_vendors_on_customer_id"
+    t.index ["vendor_id"], name: "index_customer_vendors_on_vendor_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -40,16 +51,23 @@ ActiveRecord::Schema.define(version: 2021_04_27_024805) do
     t.string "image"
     t.string "vendor_name"
     t.string "category"
+    t.integer "vendor_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.boolean "vendor"
+    t.integer "role"
     t.string "username"
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "cart_products", "products"
+  add_foreign_key "cart_products", "users", column: "customer_id"
+  add_foreign_key "customer_vendors", "users", column: "customer_id"
+  add_foreign_key "customer_vendors", "users", column: "vendor_id"
 end
